@@ -1,0 +1,6 @@
+# Pinned, hash-checked install for the OPT-IN intent probe only (not an engine dependency).
+# Install with --no-deps so nothing else on this machine is upgraded:
+#   python -m pip install --no-deps --require-hashes -r scripts/intent_probe_requirements.txt
+# The hash is the wheel digest listed by the PyPI simple index for laya 0.4.6. If it does not
+# match, pip refuses to install.
+laya==0.4.6 --hash=sha256:93fab7677aab9cb71cd4f9cb4477e334618f85ccdff684520a5dd144c3316a88

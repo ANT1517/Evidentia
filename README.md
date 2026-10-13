@@ -19,7 +19,10 @@ assessment = analyze(normalized_message)
 | Rule checks (`engine/rules.py`) + config (`engine/config.py`) | done (rules-only baseline) |
 | Policy layer (`engine/policy.py`, version 0.2.0) | done |
 | Threat-intel adapters (`engine/threat_intel/`) | done (mocked tests only; **never run live**) |
-| DistilBERT / Laya / SMS-Shield wrappers | todo |
+| Email DistilBERT (`cybersectony/...v2.4.1`) | **evaluated, not integrated**: label mapping unresolved and fails basic cases, see `docs/email_model_suitability.md` |
+| Laya intent questions (`Ankit1106/laya-typed-decisions`) | **assessed by smoke test, no adapter**: ranking signal but uncalibrated; recommendation is a larger labelled evaluation first, see `docs/intent_model_suitability.md` |
+| SMS-Shield wrapper | todo |
+| Labelled evaluation dataset **tooling** (`evaluation/`) | schema, annotation guide, validator and split tools done; **no evaluation corpus exists yet** (11 synthetic format examples, all provisional). See `docs/evaluation_dataset_spec.md` |
 | Campaign linker | todo |
 | Test set + tuning | todo |
 
@@ -142,6 +145,19 @@ default 15 s). Never call it on an asyncio event-loop thread: use
 each get their own, so duplicate lookups and combined quota overruns are possible. No
 distributed cache or global rate limiter exists; implement `Cache` / `RateLimiter` over a
 shared store before scaling out.
+
+## Evaluation dataset (tooling only)
+
+`evaluation/` holds the record schema, an offline validator, and leakage-safe split tools. It is
+independent of `engine/` and loads no model. There is no evaluation corpus in the repository
+yet: `evaluation/data/examples_synthetic.jsonl` is 11 synthetic format examples with
+provisional labels. Specification: `docs/evaluation_dataset_spec.md`; labelling rules:
+`docs/annotation_guide.md`; open questions: `docs/outstanding_review_items.md`.
+
+```bash
+python scripts/validate_eval_dataset.py evaluation/data/examples_synthetic.jsonl
+python scripts/make_eval_splits.py FILE.jsonl --seed 20261013 --out-manifest splits.json --out-data FILE.split.jsonl
+```
 
 ## Run tests
 

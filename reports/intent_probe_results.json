@@ -1,0 +1,1157 @@
+{
+  "info": {
+    "repo_id": "Ankit1106/laya-typed-decisions",
+    "revision": "66172d2dfdd5d5c31f0aa5cc999ed2cf2f4b78a2",
+    "model_safetensors_sha256": "59627bc3f726abb45eac3508e322225f498200a79d21286e7369183a659f38c6",
+    "laya": "0.4.6",
+    "device": "cpu",
+    "network_blocked_during_inference": true
+  },
+  "decision_threshold": 0.5,
+  "gates": {
+    "valid_outputs": "every answer parses to a finite probability in [0, 1]",
+    "separation": "mean P(yes) on expected-yes cases exceeds mean on expected-no cases by >= 0.30",
+    "agreement": "agreement with the expected label at the fixed 0.5 cut is >= 80%"
+  },
+  "rows": [
+    {
+      "id": "exec_announcement_legit",
+      "kind": "legit_exec",
+      "chars": 160,
+      "expected": {
+        "exec_claim": true,
+        "payment_request": false,
+        "credential_request": false,
+        "urgency_secrecy": false
+      },
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "exec_claim": {
+            "type": "noul",
+            "noul": 0.5184,
+            "confidence": 0.5184,
+            "answer_confidence": 0.5184,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "payment_request": {
+            "type": "noul",
+            "noul": 0.1642,
+            "confidence": 0.8358,
+            "answer_confidence": 0.8358,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "credential_request": {
+            "type": "noul",
+            "noul": 0.2096,
+            "confidence": 0.7904,
+            "answer_confidence": 0.7904,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "urgency_secrecy": {
+            "type": "noul",
+            "noul": 0.1616,
+            "confidence": 0.8384,
+            "answer_confidence": 0.8384,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 359,
+          "output_tokens": 0,
+          "state_tokens": 43,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      "parsed": {
+        "exec_claim": 0.5184,
+        "payment_request": 0.1642,
+        "credential_request": 0.2096,
+        "urgency_secrecy": 0.1616
+      },
+      "error": null
+    },
+    {
+      "id": "ceo_wire_urgent",
+      "kind": "bec",
+      "chars": 146,
+      "expected": {
+        "exec_claim": true,
+        "payment_request": true,
+        "credential_request": false,
+        "urgency_secrecy": true
+      },
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "exec_claim": {
+            "type": "noul",
+            "noul": 0.6426,
+            "confidence": 0.6426,
+            "answer_confidence": 0.6426,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "payment_request": {
+            "type": "noul",
+            "noul": 0.5676,
+            "confidence": 0.5676,
+            "answer_confidence": 0.5676,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "credential_request": {
+            "type": "noul",
+            "noul": 0.3379,
+            "confidence": 0.6621,
+            "answer_confidence": 0.6621,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "urgency_secrecy": {
+            "type": "noul",
+            "noul": 0.6384,
+            "confidence": 0.6384,
+            "answer_confidence": 0.6384,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 367,
+          "output_tokens": 0,
+          "state_tokens": 45,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      "parsed": {
+        "exec_claim": 0.6426,
+        "payment_request": 0.5676,
+        "credential_request": 0.3379,
+        "urgency_secrecy": 0.6384
+      },
+      "error": null
+    },
+    {
+      "id": "vendor_bank_change",
+      "kind": "bec",
+      "chars": 164,
+      "expected": {
+        "exec_claim": false,
+        "payment_request": true,
+        "credential_request": false,
+        "urgency_secrecy": false
+      },
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "exec_claim": {
+            "type": "noul",
+            "noul": 0.279,
+            "confidence": 0.721,
+            "answer_confidence": 0.721,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "payment_request": {
+            "type": "noul",
+            "noul": 0.5864,
+            "confidence": 0.5864,
+            "answer_confidence": 0.5864,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "credential_request": {
+            "type": "noul",
+            "noul": 0.4384,
+            "confidence": 0.5616,
+            "answer_confidence": 0.5616,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "urgency_secrecy": {
+            "type": "noul",
+            "noul": 0.3736,
+            "confidence": 0.6264,
+            "answer_confidence": 0.6264,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 351,
+          "output_tokens": 0,
+          "state_tokens": 41,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      "parsed": {
+        "exec_claim": 0.279,
+        "payment_request": 0.5864,
+        "credential_request": 0.4384,
+        "urgency_secrecy": 0.3736
+      },
+      "error": null
+    },
+    {
+      "id": "credential_harvest",
+      "kind": "phish",
+      "chars": 136,
+      "expected": {
+        "exec_claim": false,
+        "payment_request": false,
+        "credential_request": true,
+        "urgency_secrecy": true
+      },
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "exec_claim": {
+            "type": "noul",
+            "noul": 0.386,
+            "confidence": 0.614,
+            "answer_confidence": 0.614,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "payment_request": {
+            "type": "noul",
+            "noul": 0.2843,
+            "confidence": 0.7157,
+            "answer_confidence": 0.7157,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "credential_request": {
+            "type": "noul",
+            "noul": 0.6201,
+            "confidence": 0.6201,
+            "answer_confidence": 0.6201,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "urgency_secrecy": {
+            "type": "noul",
+            "noul": 0.6475,
+            "confidence": 0.6475,
+            "answer_confidence": 0.6475,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 319,
+          "output_tokens": 0,
+          "state_tokens": 33,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      "parsed": {
+        "exec_claim": 0.386,
+        "payment_request": 0.2843,
+        "credential_request": 0.6201,
+        "urgency_secrecy": 0.6475
+      },
+      "error": null
+    },
+    {
+      "id": "auth_code_request",
+      "kind": "phish",
+      "chars": 87,
+      "expected": {
+        "exec_claim": false,
+        "payment_request": false,
+        "credential_request": true,
+        "urgency_secrecy": false
+      },
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "exec_claim": {
+            "type": "noul",
+            "noul": 0.2766,
+            "confidence": 0.7234,
+            "answer_confidence": 0.7234,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "payment_request": {
+            "type": "noul",
+            "noul": 0.2255,
+            "confidence": 0.7745,
+            "answer_confidence": 0.7745,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "credential_request": {
+            "type": "noul",
+            "noul": 0.545,
+            "confidence": 0.545,
+            "answer_confidence": 0.545,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "urgency_secrecy": {
+            "type": "noul",
+            "noul": 0.4771,
+            "confidence": 0.5229,
+            "answer_confidence": 0.5229,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 287,
+          "output_tokens": 0,
+          "state_tokens": 25,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      "parsed": {
+        "exec_claim": 0.2766,
+        "payment_request": 0.2255,
+        "credential_request": 0.545,
+        "urgency_secrecy": 0.4771
+      },
+      "error": null
+    },
+    {
+      "id": "legit_invoice_due",
+      "kind": "legit_payment",
+      "chars": 131,
+      "expected": {
+        "exec_claim": false,
+        "payment_request": true,
+        "credential_request": false,
+        "urgency_secrecy": false
+      },
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "exec_claim": {
+            "type": "noul",
+            "noul": 0.2135,
+            "confidence": 0.7865,
+            "answer_confidence": 0.7865,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "payment_request": {
+            "type": "noul",
+            "noul": 0.5483,
+            "confidence": 0.5483,
+            "answer_confidence": 0.5483,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "credential_request": {
+            "type": "noul",
+            "noul": 0.2438,
+            "confidence": 0.7562,
+            "answer_confidence": 0.7562,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "urgency_secrecy": {
+            "type": "noul",
+            "noul": 0.2883,
+            "confidence": 0.7117,
+            "answer_confidence": 0.7117,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 347,
+          "output_tokens": 0,
+          "state_tokens": 40,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      "parsed": {
+        "exec_claim": 0.2135,
+        "payment_request": 0.5483,
+        "credential_request": 0.2438,
+        "urgency_secrecy": 0.2883
+      },
+      "error": null
+    },
+    {
+      "id": "payment_receipt",
+      "kind": "legit_payment",
+      "chars": 118,
+      "expected": {
+        "exec_claim": false,
+        "payment_request": false,
+        "credential_request": false,
+        "urgency_secrecy": false
+      },
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "exec_claim": {
+            "type": "noul",
+            "noul": 0.3294,
+            "confidence": 0.6706,
+            "answer_confidence": 0.6706,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "payment_request": {
+            "type": "noul",
+            "noul": 0.2017,
+            "confidence": 0.7983,
+            "answer_confidence": 0.7983,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "credential_request": {
+            "type": "noul",
+            "noul": 0.1821,
+            "confidence": 0.8179,
+            "answer_confidence": 0.8179,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "urgency_secrecy": {
+            "type": "noul",
+            "noul": 0.194,
+            "confidence": 0.806,
+            "answer_confidence": 0.806,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 327,
+          "output_tokens": 0,
+          "state_tokens": 35,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      "parsed": {
+        "exec_claim": 0.3294,
+        "payment_request": 0.2017,
+        "credential_request": 0.1821,
+        "urgency_secrecy": 0.194
+      },
+      "error": null
+    },
+    {
+      "id": "security_reminder",
+      "kind": "legit_security",
+      "chars": 156,
+      "expected": {
+        "exec_claim": false,
+        "payment_request": false,
+        "credential_request": false,
+        "urgency_secrecy": false
+      },
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "exec_claim": {
+            "type": "noul",
+            "noul": 0.266,
+            "confidence": 0.734,
+            "answer_confidence": 0.734,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "payment_request": {
+            "type": "noul",
+            "noul": 0.1526,
+            "confidence": 0.8474,
+            "answer_confidence": 0.8474,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "credential_request": {
+            "type": "noul",
+            "noul": 0.4401,
+            "confidence": 0.5599,
+            "answer_confidence": 0.5599,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "urgency_secrecy": {
+            "type": "noul",
+            "noul": 0.5357,
+            "confidence": 0.5357,
+            "answer_confidence": 0.5357,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 355,
+          "output_tokens": 0,
+          "state_tokens": 42,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      "parsed": {
+        "exec_claim": 0.266,
+        "payment_request": 0.1526,
+        "credential_request": 0.4401,
+        "urgency_secrecy": 0.5357
+      },
+      "error": null
+    },
+    {
+      "id": "urgent_legit_ops",
+      "kind": "legit_urgent",
+      "chars": 136,
+      "expected": {
+        "exec_claim": false,
+        "payment_request": false,
+        "credential_request": false,
+        "urgency_secrecy": true
+      },
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "exec_claim": {
+            "type": "noul",
+            "noul": 0.2927,
+            "confidence": 0.7073,
+            "answer_confidence": 0.7073,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "payment_request": {
+            "type": "noul",
+            "noul": 0.1645,
+            "confidence": 0.8355,
+            "answer_confidence": 0.8355,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "credential_request": {
+            "type": "noul",
+            "noul": 0.177,
+            "confidence": 0.823,
+            "answer_confidence": 0.823,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "urgency_secrecy": {
+            "type": "noul",
+            "noul": 0.5698,
+            "confidence": 0.5698,
+            "answer_confidence": 0.5698,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 319,
+          "output_tokens": 0,
+          "state_tokens": 33,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      "parsed": {
+        "exec_claim": 0.2927,
+        "payment_request": 0.1645,
+        "credential_request": 0.177,
+        "urgency_secrecy": 0.5698
+      },
+      "error": null
+    },
+    {
+      "id": "giftcard_bec",
+      "kind": "bec",
+      "chars": 145,
+      "expected": {
+        "exec_claim": true,
+        "payment_request": true,
+        "credential_request": false,
+        "urgency_secrecy": false
+      },
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "exec_claim": {
+            "type": "noul",
+            "noul": 0.4724,
+            "confidence": 0.5276,
+            "answer_confidence": 0.5276,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "payment_request": {
+            "type": "noul",
+            "noul": 0.5268,
+            "confidence": 0.5268,
+            "answer_confidence": 0.5268,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "credential_request": {
+            "type": "noul",
+            "noul": 0.4447,
+            "confidence": 0.5553,
+            "answer_confidence": 0.5553,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "urgency_secrecy": {
+            "type": "noul",
+            "noul": 0.4897,
+            "confidence": 0.5103,
+            "answer_confidence": 0.5103,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 355,
+          "output_tokens": 0,
+          "state_tokens": 42,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      "parsed": {
+        "exec_claim": 0.4724,
+        "payment_request": 0.5268,
+        "credential_request": 0.4447,
+        "urgency_secrecy": 0.4897
+      },
+      "error": null
+    },
+    {
+      "id": "payroll_change_bec",
+      "kind": "bec",
+      "chars": 103,
+      "expected": {
+        "exec_claim": false,
+        "payment_request": true,
+        "credential_request": false,
+        "urgency_secrecy": false
+      },
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "exec_claim": {
+            "type": "noul",
+            "noul": 0.2004,
+            "confidence": 0.7996,
+            "answer_confidence": 0.7996,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "payment_request": {
+            "type": "noul",
+            "noul": 0.4991,
+            "confidence": 0.5009,
+            "answer_confidence": 0.5009,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "credential_request": {
+            "type": "noul",
+            "noul": 0.2882,
+            "confidence": 0.7118,
+            "answer_confidence": 0.7118,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "urgency_secrecy": {
+            "type": "noul",
+            "noul": 0.3329,
+            "confidence": 0.6671,
+            "answer_confidence": 0.6671,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 303,
+          "output_tokens": 0,
+          "state_tokens": 29,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      "parsed": {
+        "exec_claim": 0.2004,
+        "payment_request": 0.4991,
+        "credential_request": 0.2882,
+        "urgency_secrecy": 0.3329
+      },
+      "error": null
+    },
+    {
+      "id": "ambiguous_confirm_bank",
+      "kind": "ambiguous",
+      "chars": 162,
+      "expected": {
+        "exec_claim": null,
+        "payment_request": null,
+        "credential_request": false,
+        "urgency_secrecy": false
+      },
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "exec_claim": {
+            "type": "noul",
+            "noul": 0.3333,
+            "confidence": 0.6667,
+            "answer_confidence": 0.6667,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "payment_request": {
+            "type": "noul",
+            "noul": 0.29,
+            "confidence": 0.71,
+            "answer_confidence": 0.71,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "credential_request": {
+            "type": "noul",
+            "noul": 0.3894,
+            "confidence": 0.6106,
+            "answer_confidence": 0.6106,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "urgency_secrecy": {
+            "type": "noul",
+            "noul": 0.4019,
+            "confidence": 0.5981,
+            "answer_confidence": 0.5981,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 359,
+          "output_tokens": 0,
+          "state_tokens": 43,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      "parsed": {
+        "exec_claim": 0.3333,
+        "payment_request": 0.29,
+        "credential_request": 0.3894,
+        "urgency_secrecy": 0.4019
+      },
+      "error": null
+    },
+    {
+      "id": "injection_in_body",
+      "kind": "injection",
+      "chars": 292,
+      "expected": {
+        "exec_claim": true,
+        "payment_request": true,
+        "credential_request": false,
+        "urgency_secrecy": true
+      },
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "exec_claim": {
+            "type": "noul",
+            "noul": 0.6153,
+            "confidence": 0.6153,
+            "answer_confidence": 0.6153,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "payment_request": {
+            "type": "noul",
+            "noul": 0.4625,
+            "confidence": 0.5375,
+            "answer_confidence": 0.5375,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "credential_request": {
+            "type": "noul",
+            "noul": 0.3363,
+            "confidence": 0.6637,
+            "answer_confidence": 0.6637,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "urgency_secrecy": {
+            "type": "noul",
+            "noul": 0.6631,
+            "confidence": 0.6631,
+            "answer_confidence": 0.6631,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 503,
+          "output_tokens": 0,
+          "state_tokens": 79,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      "parsed": {
+        "exec_claim": 0.6153,
+        "payment_request": 0.4625,
+        "credential_request": 0.3363,
+        "urgency_secrecy": 0.6631
+      },
+      "error": null
+    },
+    {
+      "id": "empty_message",
+      "kind": "short",
+      "chars": 0,
+      "expected": {
+        "exec_claim": false,
+        "payment_request": false,
+        "credential_request": false,
+        "urgency_secrecy": false
+      },
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "exec_claim": {
+            "type": "noul",
+            "noul": 0.2563,
+            "confidence": 0.7437,
+            "answer_confidence": 0.7437,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "payment_request": {
+            "type": "noul",
+            "noul": 0.3922,
+            "confidence": 0.6078,
+            "answer_confidence": 0.6078,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "credential_request": {
+            "type": "noul",
+            "noul": 0.401,
+            "confidence": 0.599,
+            "answer_confidence": 0.599,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "urgency_secrecy": {
+            "type": "noul",
+            "noul": 0.4246,
+            "confidence": 0.5754,
+            "answer_confidence": 0.5754,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 195,
+          "output_tokens": 0,
+          "state_tokens": 2,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      "parsed": {
+        "exec_claim": 0.2563,
+        "payment_request": 0.3922,
+        "credential_request": 0.401,
+        "urgency_secrecy": 0.4246
+      },
+      "error": null
+    },
+    {
+      "id": "very_short_ok",
+      "kind": "short",
+      "chars": 2,
+      "expected": {
+        "exec_claim": false,
+        "payment_request": false,
+        "credential_request": false,
+        "urgency_secrecy": false
+      },
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "exec_claim": {
+            "type": "noul",
+            "noul": 0.2372,
+            "confidence": 0.7628,
+            "answer_confidence": 0.7628,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "payment_request": {
+            "type": "noul",
+            "noul": 0.271,
+            "confidence": 0.729,
+            "answer_confidence": 0.729,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "credential_request": {
+            "type": "noul",
+            "noul": 0.3171,
+            "confidence": 0.6829,
+            "answer_confidence": 0.6829,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "urgency_secrecy": {
+            "type": "noul",
+            "noul": 0.3205,
+            "confidence": 0.6795,
+            "answer_confidence": 0.6795,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 207,
+          "output_tokens": 0,
+          "state_tokens": 5,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      "parsed": {
+        "exec_claim": 0.2372,
+        "payment_request": 0.271,
+        "credential_request": 0.3171,
+        "urgency_secrecy": 0.3205
+      },
+      "error": null
+    },
+    {
+      "id": "very_short_thanks",
+      "kind": "short",
+      "chars": 7,
+      "expected": {
+        "exec_claim": false,
+        "payment_request": false,
+        "credential_request": false,
+        "urgency_secrecy": false
+      },
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "exec_claim": {
+            "type": "noul",
+            "noul": 0.1678,
+            "confidence": 0.8322,
+            "answer_confidence": 0.8322,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "payment_request": {
+            "type": "noul",
+            "noul": 0.1949,
+            "confidence": 0.8051,
+            "answer_confidence": 0.8051,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "credential_request": {
+            "type": "noul",
+            "noul": 0.2489,
+            "confidence": 0.7511,
+            "answer_confidence": 0.7511,
+            "action": {
+              "act_probability": 1.0
+            }
+          },
+          "urgency_secrecy": {
+            "type": "noul",
+            "noul": 0.206,
+            "confidence": 0.794,
+            "answer_confidence": 0.794,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 211,
+          "output_tokens": 0,
+          "state_tokens": 6,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      "parsed": {
+        "exec_claim": 0.1678,
+        "payment_request": 0.1949,
+        "credential_request": 0.2489,
+        "urgency_secrecy": 0.206
+      },
+      "error": null
+    }
+  ],
+  "per_question": {
+    "exec_claim": {
+      "n_scored": 15,
+      "invalid": 0,
+      "tp": 3,
+      "tn": 11,
+      "fp": 0,
+      "fn": 1,
+      "agreement": 0.9333333333333333,
+      "mean_p_expected_yes": 0.562175,
+      "mean_p_expected_no": 0.2640818181818182,
+      "separation": 0.2980931818181818,
+      "gate_valid_outputs": true,
+      "gate_separation": false,
+      "gate_agreement": true,
+      "passes_all_gates": false
+    },
+    "payment_request": {
+      "n_scored": 15,
+      "invalid": 0,
+      "tp": 4,
+      "tn": 9,
+      "fp": 0,
+      "fn": 2,
+      "agreement": 0.8666666666666667,
+      "mean_p_expected_yes": 0.5317833333333334,
+      "mean_p_expected_no": 0.22787777777777776,
+      "separation": 0.30390555555555565,
+      "gate_valid_outputs": true,
+      "gate_separation": true,
+      "gate_agreement": true,
+      "passes_all_gates": true
+    },
+    "credential_request": {
+      "n_scored": 16,
+      "invalid": 0,
+      "tp": 2,
+      "tn": 14,
+      "fp": 0,
+      "fn": 0,
+      "agreement": 1.0,
+      "mean_p_expected_yes": 0.58255,
+      "mean_p_expected_no": 0.3181785714285715,
+      "separation": 0.26437142857142854,
+      "gate_valid_outputs": true,
+      "gate_separation": false,
+      "gate_agreement": true,
+      "passes_all_gates": false
+    },
+    "urgency_secrecy": {
+      "n_scored": 16,
+      "invalid": 0,
+      "tp": 4,
+      "tn": 11,
+      "fp": 1,
+      "fn": 0,
+      "agreement": 0.9375,
+      "mean_p_expected_yes": 0.6296999999999999,
+      "mean_p_expected_no": 0.35049166666666665,
+      "separation": 0.2792083333333333,
+      "gate_valid_outputs": true,
+      "gate_separation": false,
+      "gate_agreement": true,
+      "passes_all_gates": false
+    }
+  },
+  "note": "smoke test on a tiny synthetic set; not an accuracy estimate"
+}

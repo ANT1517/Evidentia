@@ -1,0 +1,357 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "One JSON Lines record. Structural schema only; see evaluation/validate.py for cross-field rules.",
+  "properties": {
+    "annotation": {
+      "additionalProperties": false,
+      "properties": {
+        "adjudicator": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "annotators": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "authored_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$",
+          "type": "string"
+        },
+        "initial_disagreement": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "authored_by",
+        "annotators"
+      ],
+      "type": "object"
+    },
+    "body": {
+      "maxLength": 20000,
+      "type": "string"
+    },
+    "channel": {
+      "enum": [
+        "email"
+      ]
+    },
+    "contains_embedded_instruction": {
+      "type": "boolean"
+    },
+    "evidence_spans": {
+      "additionalProperties": false,
+      "properties": {
+        "authority_claim_in_content": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "end": {
+                "minimum": 1,
+                "type": "integer"
+              },
+              "field": {
+                "enum": [
+                  "subject",
+                  "body"
+                ]
+              },
+              "start": {
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "field",
+              "start",
+              "end"
+            ],
+            "type": "object"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "credential_request": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "end": {
+                "minimum": 1,
+                "type": "integer"
+              },
+              "field": {
+                "enum": [
+                  "subject",
+                  "body"
+                ]
+              },
+              "start": {
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "field",
+              "start",
+              "end"
+            ],
+            "type": "object"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "payment_request": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "end": {
+                "minimum": 1,
+                "type": "integer"
+              },
+              "field": {
+                "enum": [
+                  "subject",
+                  "body"
+                ]
+              },
+              "start": {
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "field",
+              "start",
+              "end"
+            ],
+            "type": "object"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "urgency_secrecy": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "end": {
+                "minimum": 1,
+                "type": "integer"
+              },
+              "field": {
+                "enum": [
+                  "subject",
+                  "body"
+                ]
+              },
+              "start": {
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "field",
+              "start",
+              "end"
+            ],
+            "type": "object"
+          },
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "group_id": {
+      "pattern": "^[a-z0-9][a-z0-9_-]{2,63}$",
+      "type": "string"
+    },
+    "has_url": {
+      "type": "boolean"
+    },
+    "id": {
+      "pattern": "^[a-z0-9][a-z0-9_-]{2,63}$",
+      "type": "string"
+    },
+    "label_status": {
+      "enum": [
+        "provisional",
+        "reviewed",
+        "adjudicated",
+        "needs_review"
+      ]
+    },
+    "labels": {
+      "additionalProperties": false,
+      "properties": {
+        "authority_claim_in_content": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "credential_request": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "payment_request": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "urgency_secrecy": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "authority_claim_in_content",
+        "payment_request",
+        "credential_request",
+        "urgency_secrecy"
+      ],
+      "type": "object"
+    },
+    "language": {
+      "enum": [
+        "en",
+        "hi",
+        "hi-Latn",
+        "mixed",
+        "other"
+      ]
+    },
+    "notes": {
+      "maxLength": 500,
+      "type": "string"
+    },
+    "outcome": {
+      "enum": [
+        "legitimate",
+        "suspicious",
+        "malicious",
+        "ambiguous"
+      ]
+    },
+    "provenance": {
+      "properties": {
+        "author": {
+          "type": "string"
+        },
+        "generator": {
+          "enum": [
+            "human",
+            "template",
+            "llm",
+            "dataset"
+          ]
+        },
+        "generator_model": {
+          "type": "string"
+        },
+        "license": {
+          "enum": [
+            "project-synthetic",
+            "CC0-1.0",
+            "CC-BY-4.0",
+            "CC-BY-SA-4.0",
+            "MIT",
+            "Apache-2.0",
+            "ODC-By-1.0"
+          ]
+        },
+        "redaction_applied": {
+          "type": "boolean"
+        },
+        "retrieved_on": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "type": "string"
+        },
+        "source_id": {
+          "type": "string"
+        },
+        "source_type": {
+          "enum": [
+            "synthetic",
+            "public_dataset",
+            "licensed_corpus",
+            "contributed"
+          ]
+        }
+      },
+      "required": [
+        "source_type",
+        "license",
+        "generator"
+      ],
+      "type": "object"
+    },
+    "scenario": {
+      "enum": [
+        "transactional_legit",
+        "internal_business_legit",
+        "executive_announcement_legit",
+        "security_notice_legit",
+        "urgent_ops_legit",
+        "credential_phish",
+        "bec_executive_payment",
+        "bec_giftcard",
+        "bec_payroll_change",
+        "vendor_bank_change",
+        "malicious_link",
+        "no_url_attack",
+        "short_or_empty",
+        "ambiguous",
+        "adversarial_instruction",
+        "other"
+      ]
+    },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "split": {
+      "enum": [
+        "dev",
+        "calibration",
+        "test",
+        "unassigned"
+      ]
+    },
+    "subject": {
+      "maxLength": 300,
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "subject",
+    "body",
+    "language",
+    "channel",
+    "has_url",
+    "scenario",
+    "labels",
+    "outcome",
+    "label_status",
+    "annotation",
+    "provenance",
+    "group_id",
+    "split"
+  ],
+  "title": "Phishing / intent evaluation record",
+  "type": "object"
+}

@@ -5,3 +5,10 @@ __pycache__/
 .pytest_cache/
 .cache/
 *.egg-info/
+
+# Evaluation data that may contain non-synthetic or private text. Commit only reviewed, licensed or wholly synthetic files that are named explicitly in docs.
+evaluation/data/private/
+evaluation/data/raw/
+*.private.jsonl
+*.local.jsonl
+evaluation/data/*.manifest.local.json

@@ -1,0 +1,682 @@
+{
+  "info": {
+    "repo_id": "cybersectony/phishing-email-detection-distilbert_v2.4.1",
+    "revision": "6724dec17360ab1f6450553f1d950404f66a5dde",
+    "model_safetensors_sha256": "42e571f4e66cc6e34f949ebbcc61d7d2299fbfda29d2ebbbcfe11225133e6e71",
+    "transformers": "5.15.0",
+    "torch": "2.7.1+cpu",
+    "num_labels": 4,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1",
+      "2": "LABEL_2",
+      "3": "LABEL_3"
+    },
+    "max_position_embeddings": 512,
+    "problem_type": "single_label_classification",
+    "tokenizer_model_max_length": 512
+  },
+  "results": [
+    {
+      "id": "legit_business",
+      "group": "email",
+      "human_label": "legitimate",
+      "chars": 178,
+      "logits": [
+        7.5177531242370605,
+        -4.200032711029053,
+        -9.539484024047852,
+        -6.821138858795166
+      ],
+      "tokens": 36,
+      "tokens_untruncated": 36,
+      "truncated": false,
+      "scores": [
+        0.9999912208563911,
+        8.147539204124304e-06,
+        3.909599020690281e-08,
+        5.925084145804815e-07
+      ],
+      "argmax": 0
+    },
+    {
+      "id": "legit_urgent",
+      "group": "email",
+      "human_label": "legitimate",
+      "chars": 171,
+      "logits": [
+        6.913733959197998,
+        -3.078897476196289,
+        -9.1138916015625,
+        -7.111170291900635
+      ],
+      "tokens": 39,
+      "tokens_untruncated": 39,
+      "truncated": false,
+      "scores": [
+        0.9999533459343467,
+        4.573356386614997e-05,
+        1.0946376935460518e-07,
+        8.110380177961292e-07
+      ],
+      "argmax": 0
+    },
+    {
+      "id": "legit_invoice",
+      "group": "email",
+      "human_label": "legitimate",
+      "chars": 161,
+      "logits": [
+        0.04031958803534508,
+        5.495217323303223,
+        -10.497093200683594,
+        -10.618071556091309
+      ],
+      "tokens": 39,
+      "tokens_untruncated": 39,
+      "truncated": false,
+      "scores": [
+        0.004257112569805252,
+        0.9957426744550947,
+        1.1292104968836597e-07,
+        1.0005405038245686e-07
+      ],
+      "argmax": 1
+    },
+    {
+      "id": "phish_credential",
+      "group": "email",
+      "human_label": "phishing",
+      "chars": 241,
+      "logits": [
+        -1.3651127815246582,
+        6.725881576538086,
+        -11.524223327636719,
+        -10.732455253601074
+      ],
+      "tokens": 57,
+      "tokens_untruncated": 57,
+      "truncated": false,
+      "scores": [
+        0.0003061912552055148,
+        0.9996937707183144,
+        1.1856244094296316e-08,
+        2.6170235899687286e-08
+      ],
+      "argmax": 1
+    },
+    {
+      "id": "phish_bank",
+      "group": "email",
+      "human_label": "phishing",
+      "chars": 198,
+      "logits": [
+        -4.064172267913818,
+        7.125875949859619,
+        -10.255975723266602,
+        -9.146930694580078
+      ],
+      "tokens": 49,
+      "tokens_untruncated": 49,
+      "truncated": false,
+      "scores": [
+        1.3810765757877403e-05,
+        0.9999860753104949,
+        2.825866790522458e-08,
+        8.566507940595128e-08
+      ],
+      "argmax": 1
+    },
+    {
+      "id": "bec_no_url",
+      "group": "email",
+      "human_label": "phishing",
+      "chars": 262,
+      "logits": [
+        0.23105831444263458,
+        5.717157363891602,
+        -10.918017387390137,
+        -11.223316192626953
+      ],
+      "tokens": 59,
+      "tokens_untruncated": 59,
+      "truncated": false,
+      "scores": [
+        0.0041268760272645056,
+        0.9958730208356226,
+        5.9379887040537687e-08,
+        4.3757225864460844e-08
+      ],
+      "argmax": 1
+    },
+    {
+      "id": "giftcard_bec",
+      "group": "email",
+      "human_label": "phishing",
+      "chars": 173,
+      "logits": [
+        4.9711174964904785,
+        -1.6397687196731567,
+        -7.0231523513793945,
+        -6.162477970123291
+      ],
+      "tokens": 51,
+      "tokens_untruncated": 51,
+      "truncated": false,
+      "scores": [
+        0.9986354329214104,
+        0.0013438028789152067,
+        6.1710883187954455e-06,
+        1.4593111355475436e-05
+      ],
+      "argmax": 0
+    },
+    {
+      "id": "email_with_susp_url",
+      "group": "email",
+      "human_label": "phishing",
+      "chars": 129,
+      "logits": [
+        -0.8096482157707214,
+        2.507046699523926,
+        -6.122516632080078,
+        -3.960197925567627
+      ],
+      "tokens": 43,
+      "tokens_untruncated": 43,
+      "truncated": false,
+      "scores": [
+        0.03494446170111418,
+        0.9633867184031255,
+        0.00017219832335098315,
+        0.00149662157240932
+      ],
+      "argmax": 1
+    },
+    {
+      "id": "edge_empty",
+      "group": "edge",
+      "human_label": "n/a",
+      "chars": 0,
+      "logits": [
+        -1.5063555240631104,
+        6.657059192657471,
+        -11.066557884216309,
+        -10.999375343322754
+      ],
+      "tokens": 2,
+      "tokens_untruncated": 2,
+      "truncated": false,
+      "scores": [
+        0.00028480677057901815,
+        0.9997151516890229,
+        2.007276399742322e-08,
+        2.1467634140387393e-08
+      ],
+      "argmax": 1
+    },
+    {
+      "id": "edge_whitespace",
+      "group": "edge",
+      "human_label": "n/a",
+      "chars": 7,
+      "logits": [
+        -1.5063555240631104,
+        6.657059192657471,
+        -11.066557884216309,
+        -10.999375343322754
+      ],
+      "tokens": 2,
+      "tokens_untruncated": 2,
+      "truncated": false,
+      "scores": [
+        0.00028480677057901815,
+        0.9997151516890229,
+        2.007276399742322e-08,
+        2.1467634140387393e-08
+      ],
+      "argmax": 1
+    },
+    {
+      "id": "edge_ok",
+      "group": "edge",
+      "human_label": "n/a",
+      "chars": 2,
+      "logits": [
+        2.2592146396636963,
+        3.9551241397857666,
+        -10.680973052978516,
+        -10.998299598693848
+      ],
+      "tokens": 3,
+      "tokens_untruncated": 3,
+      "truncated": false,
+      "scores": [
+        0.15500016367372133,
+        0.8449991935687856,
+        3.71946132321427e-07,
+        2.708113606900882e-07
+      ],
+      "argmax": 1
+    },
+    {
+      "id": "edge_literal_empty_word",
+      "group": "edge",
+      "human_label": "n/a",
+      "chars": 5,
+      "logits": [
+        0.42311352491378784,
+        3.2803876399993896,
+        -6.686482906341553,
+        -6.970095634460449
+      ],
+      "tokens": 3,
+      "tokens_untruncated": 3,
+      "truncated": false,
+      "scores": [
+        0.05430229986260148,
+        0.9456199043526383,
+        4.437718244803738e-05,
+        3.3418602312175766e-05
+      ],
+      "argmax": 1
+    },
+    {
+      "id": "edge_non_english",
+      "group": "edge",
+      "human_label": "n/a",
+      "chars": 73,
+      "logits": [
+        -1.8692398071289062,
+        6.3855109214782715,
+        -10.479436874389648,
+        -9.550251960754395
+      ],
+      "tokens": 54,
+      "tokens_untruncated": 54,
+      "truncated": false,
+      "scores": [
+        0.00025995269586471495,
+        0.9997398799607469,
+        4.737325775954095e-08,
+        1.1997013068466026e-07
+      ],
+      "argmax": 1
+    },
+    {
+      "id": "edge_long",
+      "group": "edge",
+      "human_label": "n/a",
+      "chars": 3766,
+      "logits": [
+        5.714401721954346,
+        -2.686539649963379,
+        -7.635477542877197,
+        -6.274741172790527
+      ],
+      "tokens": 512,
+      "tokens_untruncated": 731,
+      "truncated": true,
+      "scores": [
+        0.9997675939814219,
+        0.0002246035286538956,
+        1.5926493064846707e-06,
+        6.2098406177066166e-06
+      ],
+      "argmax": 0
+    },
+    {
+      "id": "url_legit",
+      "group": "url_only",
+      "human_label": "legitimate",
+      "chars": 33,
+      "logits": [
+        -6.196010112762451,
+        -8.2418794631958,
+        -5.517871379852295,
+        9.109883308410645
+      ],
+      "tokens": 14,
+      "tokens_untruncated": 14,
+      "truncated": false,
+      "scores": [
+        2.2528622784678397e-07,
+        2.912224651242412e-08,
+        4.4386055616563444e-07,
+        0.9999993017309694
+      ],
+      "argmax": 3
+    },
+    {
+      "id": "url_suspicious",
+      "group": "url_only",
+      "human_label": "phishing",
+      "chars": 59,
+      "logits": [
+        -6.455330848693848,
+        -8.497601509094238,
+        -6.1784563064575195,
+        9.802804946899414
+      ],
+      "tokens": 25,
+      "tokens_untruncated": 25,
+      "truncated": false,
+      "scores": [
+        8.693231509738403e-08,
+        1.127805912725309e-08,
+        1.1466380026630633e-07,
+        0.9999997871258255
+      ],
+      "argmax": 3
+    },
+    {
+      "id": "diag_long_phish_first",
+      "group": "diagnostic",
+      "human_label": "phishing",
+      "chars": 3797,
+      "logits": [
+        5.419641971588135,
+        -2.405343770980835,
+        -7.376364231109619,
+        -6.008921146392822
+      ],
+      "tokens": 512,
+      "tokens_untruncated": 746,
+      "truncated": true,
+      "scores": [
+        0.9995868943916653,
+        0.0003994591968458584,
+        2.7706755305359706e-06,
+        1.0875735958430213e-05
+      ],
+      "argmax": 0
+    },
+    {
+      "id": "diag_long_phish_last",
+      "group": "diagnostic",
+      "human_label": "phishing",
+      "chars": 3796,
+      "logits": [
+        5.714401721954346,
+        -2.686539649963379,
+        -7.635477542877197,
+        -6.274741172790527
+      ],
+      "tokens": 512,
+      "tokens_untruncated": 746,
+      "truncated": true,
+      "scores": [
+        0.9997675939814219,
+        0.0002246035286538956,
+        1.5926493064846707e-06,
+        6.2098406177066166e-06
+      ],
+      "argmax": 0
+    },
+    {
+      "id": "diag_phish_sentence_alone",
+      "group": "diagnostic",
+      "human_label": "phishing",
+      "chars": 76,
+      "logits": [
+        -1.1905364990234375,
+        6.626819610595703,
+        -11.493961334228516,
+        -10.927807807922363
+      ],
+      "tokens": 26,
+      "tokens_untruncated": 26,
+      "truncated": false,
+      "scores": [
+        0.00040252282656455556,
+        0.9995974399161136,
+        1.3491802124943556e-08,
+        2.37655196803892e-08
+      ],
+      "argmax": 1
+    },
+    {
+      "id": "diag_benign_reschedule",
+      "group": "diagnostic",
+      "human_label": "legitimate",
+      "chars": 90,
+      "logits": [
+        6.8919172286987305,
+        -3.098867893218994,
+        -8.97016716003418,
+        -7.255740642547607
+      ],
+      "tokens": 30,
+      "tokens_untruncated": 30,
+      "truncated": false,
+      "scores": [
+        0.9999533354012647,
+        4.5818079876780585e-05,
+        1.291706996230426e-07,
+        7.173481589007133e-07
+      ],
+      "argmax": 0
+    },
+    {
+      "id": "diag_benign_internal_invoice",
+      "group": "diagnostic",
+      "human_label": "legitimate",
+      "chars": 115,
+      "logits": [
+        5.73939847946167,
+        -3.1134493350982666,
+        -7.854044437408447,
+        -5.176537036895752
+      ],
+      "tokens": 27,
+      "tokens_untruncated": 27,
+      "truncated": false,
+      "scores": [
+        0.9998376372937943,
+        0.00014295077890058572,
+        1.248453100314221e-06,
+        1.816347420490586e-05
+      ],
+      "argmax": 0
+    },
+    {
+      "id": "diag_benign_password_policy",
+      "group": "diagnostic",
+      "human_label": "legitimate",
+      "chars": 135,
+      "logits": [
+        0.08976493030786514,
+        5.27421236038208,
+        -10.545448303222656,
+        -9.98954963684082
+      ],
+      "tokens": 28,
+      "tokens_untruncated": 28,
+      "truncated": false,
+      "scores": [
+        0.0055718107338662975,
+        0.9944278215708792,
+        1.3402380218373725e-07,
+        2.3367145230926864e-07
+      ],
+      "argmax": 1
+    },
+    {
+      "id": "diag_benign_shipping",
+      "group": "diagnostic",
+      "human_label": "legitimate",
+      "chars": 117,
+      "logits": [
+        -1.1712934970855713,
+        6.673015117645264,
+        -11.69133186340332,
+        -11.237415313720703
+      ],
+      "tokens": 27,
+      "tokens_untruncated": 27,
+      "truncated": false,
+      "scores": [
+        0.0003918229251937177,
+        0.9996081498488907,
+        1.0575361713708537e-08,
+        1.665055382499968e-08
+      ],
+      "argmax": 1
+    },
+    {
+      "id": "diag_benign_dear_customer",
+      "group": "diagnostic",
+      "human_label": "legitimate",
+      "chars": 94,
+      "logits": [
+        0.336786687374115,
+        5.6404128074646,
+        -11.061098098754883,
+        -11.273651123046875
+      ],
+      "tokens": 24,
+      "tokens_untruncated": 24,
+      "truncated": false,
+      "scores": [
+        0.004948912517648138,
+        0.9950509870684111,
+        5.552279354113221e-08,
+        4.489114712426703e-08
+      ],
+      "argmax": 1
+    },
+    {
+      "id": "diag_phish_verify_short",
+      "group": "diagnostic",
+      "human_label": "phishing",
+      "chars": 45,
+      "logits": [
+        -2.8610081672668457,
+        7.313199520111084,
+        -11.384268760681152,
+        -10.496404647827148
+      ],
+      "tokens": 12,
+      "tokens_untruncated": 12,
+      "truncated": false,
+      "scores": [
+        3.814004209278932e-05,
+        0.9999618339526057,
+        7.58186634783752e-09,
+        1.842343512355149e-08
+      ],
+      "argmax": 1
+    },
+    {
+      "id": "diag_phish_ceo_wire",
+      "group": "diagnostic",
+      "human_label": "phishing",
+      "chars": 106,
+      "logits": [
+        -3.4771411418914795,
+        7.0666680335998535,
+        -10.32628345489502,
+        -9.327958106994629
+      ],
+      "tokens": 29,
+      "tokens_untruncated": 29,
+      "truncated": false,
+      "scores": [
+        2.6355445734935216e-05,
+        0.9999735407688363,
+        2.7946385998744156e-08,
+        7.583904281604855e-08
+      ],
+      "argmax": 1
+    },
+    {
+      "id": "diag_phish_payroll",
+      "group": "diagnostic",
+      "human_label": "phishing",
+      "chars": 107,
+      "logits": [
+        6.12214469909668,
+        -1.2711976766586304,
+        -9.276102066040039,
+        -8.253982543945312
+      ],
+      "tokens": 26,
+      "tokens_untruncated": 26,
+      "truncated": false,
+      "scores": [
+        0.9993842672621785,
+        0.0006149569466014326,
+        2.0528579894697835e-07,
+        5.705054210441003e-07
+      ],
+      "argmax": 0
+    },
+    {
+      "id": "diag_degenerate_punct",
+      "group": "diagnostic",
+      "human_label": "n/a",
+      "chars": 3,
+      "logits": [
+        -1.7054797410964966,
+        4.89318323135376,
+        -7.8423285484313965,
+        -9.265593528747559
+      ],
+      "tokens": 5,
+      "tokens_untruncated": 5,
+      "truncated": false,
+      "scores": [
+        0.001360330107254296,
+        0.998636020751614,
+        2.9406594763033733e-06,
+        7.084816553300732e-07
+      ],
+      "argmax": 1
+    },
+    {
+      "id": "diag_degenerate_hello",
+      "group": "diagnostic",
+      "human_label": "n/a",
+      "chars": 5,
+      "logits": [
+        -2.104218006134033,
+        7.185519218444824,
+        -11.746841430664062,
+        -10.921095848083496
+      ],
+      "tokens": 3,
+      "tokens_untruncated": 3,
+      "truncated": false,
+      "scores": [
+        9.235879620172797e-05,
+        0.9999076215209438,
+        5.994322702850342e-09,
+        1.368853180394076e-08
+      ],
+      "argmax": 1
+    },
+    {
+      "id": "diag_degenerate_lorem",
+      "group": "diagnostic",
+      "human_label": "n/a",
+      "chars": 26,
+      "logits": [
+        0.14354993402957916,
+        5.389305591583252,
+        -10.075209617614746,
+        -10.620818138122559
+      ],
+      "tokens": 11,
+      "tokens_untruncated": 11,
+      "truncated": false,
+      "scores": [
+        0.0052422108033243625,
+        0.99475748714572,
+        1.912333336710441e-07,
+        1.1081762191239093e-07
+      ],
+      "argmax": 1
+    }
+  ],
+  "note": "raw outputs; not an accuracy measurement"
+}
