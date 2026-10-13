@@ -1,0 +1,6 @@
+{
+  "_comment": "Public test indicators ONLY. Each entry is approved verbatim for external lookup. Do not put real customer, employee or internal data here. URLs must be bare http(s) URLs with no query, fragment or credentials. Add a URL only if it is public and you are comfortable sending it to the chosen providers (for example one taken from URLhaus's or PhishTank's own public listings).",
+  "urls": [],
+  "domains": ["example.com"],
+  "sha256": ["275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"]
+}

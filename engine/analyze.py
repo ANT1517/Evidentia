@@ -10,8 +10,9 @@ from datetime import datetime, timezone
 from typing import Optional
 
 from .config import DEFAULT_CONFIG, EngineConfig
-from .policy import POLICY_VERSION, decide
+from .policy import POLICY_VERSION, PROFILES, decide
 from .rules import RULES_VERSION, run_rules
+from .threat_intel import TI_VERSION, ThreatIntelService, build_check_result
 from .schemas import (
     Assessment,
     Channel,
@@ -29,11 +30,16 @@ def analyze(
     *,
     config: EngineConfig = DEFAULT_CONFIG,
     now: Optional[datetime] = None,
+    threat_intel: Optional[ThreatIntelService] = None,
 ) -> Assessment:
     """Assess one message. Deterministic for a fixed message, config and `now`.
 
     `now` only stamps evidence.observed_at and created_at; pass it to make the whole
     Assessment byte-for-byte reproducible. The band and reasons never depend on it.
+
+    `threat_intel` is used only when the active profile requires the "threat_intel" check.
+    Under `rules_only` it is ignored and no external request is ever made. The call is
+    synchronous and may block for up to the service deadline: run it in a worker thread.
     """
     now = now or datetime.now(timezone.utc)
 
@@ -41,6 +47,13 @@ def analyze(
         return _unsupported(msg, now)
 
     results = run_rules(msg, config, now)
+    model_versions = {"rules": RULES_VERSION}
+    if threat_intel is not None and "threat_intel" in PROFILES[config.active_profile].required:
+        report = threat_intel.lookup_message(
+            msg, denied_domains=frozenset(config.org_domains), now=now
+        )
+        results.append(build_check_result(report, threat_intel.cfg, now))
+        model_versions["threat_intel"] = TI_VERSION
     decision = decide(results, config, config.active_profile, now)
 
     evidence = [e for r in results for e in r.evidence] + decision.extra_evidence
@@ -56,7 +69,7 @@ def analyze(
         reasons=decision.reasons,
         evidence=evidence,
         data_completeness=decision.data_completeness,
-        model_versions={"rules": RULES_VERSION},
+        model_versions=model_versions,
         policy_version=POLICY_VERSION,
         analysis_profile=decision.profile,
         policy_rules=decision.policy_rules,

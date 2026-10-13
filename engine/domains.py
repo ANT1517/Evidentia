@@ -49,6 +49,11 @@ def _ascii_host(host: str) -> str:
         return normalize_host(host)
 
 
+def to_ascii_host(host: str) -> str:
+    """Punycode (ASCII) form of a host, the only form ever sent to an external provider."""
+    return _ascii_host(host)
+
+
 def host_of(url: str) -> Optional[str]:
     """Normalised hostname of a URL, or None if it has none."""
     try:

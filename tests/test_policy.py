@@ -169,7 +169,7 @@ def test_completeness_none_when_nothing_ran():
 
 def test_analyze_reports_policy_version_profile_and_rules():
     a = analyze(make(), now=NOW)
-    assert a.policy_version == POLICY_VERSION == "0.1.0"
+    assert a.policy_version == POLICY_VERSION == "0.2.1"
     assert a.analysis_profile == "rules_only"
     assert a.data_completeness == "partial"
     assert a.risk_band == B.LOW

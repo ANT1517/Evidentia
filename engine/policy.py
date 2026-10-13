@@ -8,7 +8,9 @@ Precedence (first match wins):  Urgent > Review > Insufficient data > Low
            U4  a configured combination of rule facts (EngineConfig.urgent_combinations)
   Review   R1  any single meaningful indicator (reply-to mismatch, lookalike domain, link text
                mismatch, display-name impersonation, macro-capable or other risky attachment,
-               a verified auth failure or soft-fail on its own)
+               a verified auth failure or soft-fail on its own, a listed or suspicious domain,
+               an unverified PhishTank report, several VirusTotal detections, a very new domain)
+           A new domain alone, and a single VirusTotal detection, never reach Urgent.
   Insufficient data
            any check required by the active profile did not complete (failed, timed out,
            input untrusted, or was never run)
@@ -26,7 +28,7 @@ from .config import EngineConfig
 from .rules import CheckResult
 from .schemas import Evidence, EvidenceStatus, Reason, ReasonCode, RiskBand
 
-POLICY_VERSION = "0.1.0"
+POLICY_VERSION = "0.2.1"
 
 
 @dataclass(frozen=True)
@@ -49,6 +51,20 @@ PROFILES: dict[str, Profile] = {
     ),
 }
 
+# Why each Urgent/Review trigger exists and how far it can be trusted. NOTHING here is
+# calibrated against labelled data (none exists yet); "provider semantics" means the trigger
+# relies on a provider's own curated listing, "provisional" means a number we chose.
+RULE_BASIS = {
+    "U1_THREAT_INTEL_MATCH": "provider semantics (URLhaus listing, PhishTank verified+valid) "
+                             "and a provisional VirusTotal engine count (vt_urgent_min)",
+    "U2_EXECUTABLE_ATTACHMENT": "provisional: judged from file name only",
+    "U3_VERIFIED_AUTH_FAIL_WITH_IDENTITY": "provisional: trusted-header provenance required",
+    "U4_COMBINATION": "provisional: operator-configured heuristic combination",
+    "R1_INDICATOR": "provisional: single indicators, none calibrated",
+    "I1_REQUIRED_CHECK_INCOMPLETE": "structural: unknown is never clean",
+    "L1_ALL_REQUIRED_CHECKS_CLEAN": "structural: absence of rule hits, not a safety verdict",
+}
+
 _THREAT_FACTS = {"threat_intel.url_listed", "threat_intel.hash_listed"}
 _IDENTITY_FACTS = {
     "identity.brand_mismatch", "identity.exec_mismatch", "identity.person_mismatch",
@@ -60,6 +76,8 @@ _REVIEW_FACTS = (
     "identity.title_claim", "identity.display_address_mismatch",
     "attachment.macro", "attachment.risky_other",
     "auth.trusted_fail", "auth.trusted_softfail",
+    # threat intelligence (a strong listing is Urgent via U1; these are Review-level)
+    "threat_intel.domain_listed", "threat_intel.suspicious", "threat_intel.new_domain",
 )
 
 _REASON_ORDER = [
@@ -118,9 +136,17 @@ def decide(
             incomplete_evidence_ids.append(eid)
         elif not r.completed:
             missing.append(check)
-            incomplete_evidence_ids.extend(
-                e.evidence_id for e in r.evidence if e.status == EvidenceStatus.NOT_CHECKED
-            )
+            rows = [e.evidence_id for e in r.evidence if e.status == EvidenceStatus.NOT_CHECKED]
+            if not rows:
+                # An incomplete check must always leave a visible trace; never cite nothing.
+                eid = f"incomplete-{check}"
+                extra.append(Evidence(
+                    evidence_id=eid, type=check, value="incomplete", source="policy:incomplete-check",
+                    status=EvidenceStatus.NOT_CHECKED, observed_at=now,
+                    detail="The check reported itself incomplete without recording why.",
+                ))
+                rows = [eid]
+            incomplete_evidence_ids.extend(rows)
 
     # Checks that exist in the full profile but are outside this one: recorded, not required.
     for check in sorted(PROFILES["full"].required - profile.required):

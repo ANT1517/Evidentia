@@ -78,7 +78,7 @@ def _safe(text: str, limit: int = 120) -> str:
         else:
             out.append(ch)
     s = "".join(out)
-    return s if len(s) <= limit else s[: limit - 1] + "…"
+    return s if len(s) <= limit else s[: limit - 3] + "..."
 
 
 def _tokens(text: str) -> list[str]:
