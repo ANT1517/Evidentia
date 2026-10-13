@@ -159,6 +159,10 @@ python scripts/validate_eval_dataset.py evaluation/data/examples_synthetic.jsonl
 python scripts/make_eval_splits.py FILE.jsonl --seed 20261013 --out-manifest splits.json --out-data FILE.split.jsonl
 ```
 
+## Two-model prototype (experimental, not in the verdict)
+
+`engine/models/email.py` (DistilBERT class scores, label mapping `unresolved`), `engine/models/intent.py` (Laya intent probabilities) and `engine/models/runner.py` run side by side on synthetic text via `scripts/two_model_demo.py` (`TWO_MODEL_DEMO=1 ... --run`; local cached weights only, never downloads). Outputs are raw and experimental: `analyze()` does not use them, they cannot change a risk band, and the `text_model` / `intent_questions` required checks remain incomplete.
+
 ## Run tests
 
 ```bash
