@@ -1,0 +1,7 @@
+From: Bank <alerts@bank.test>
+Subject: Empty
+Date: Mon, 13 Oct 2026 10:00:00 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<html><body><img src="http://x.test/p.png"></body></html>

@@ -1,0 +1,12 @@
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+node_modules/
+pgdata/
+
+# credentials: never commit
+client_secret*.json
+*.pem
+*.key

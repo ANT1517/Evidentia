@@ -1,0 +1,2329 @@
+{
+  "components": {
+    "schemas": {
+      "AssessmentOut": {
+        "properties": {
+          "colleague_count": {
+            "title": "Colleague Count",
+            "type": "integer"
+          },
+          "data_completeness": {
+            "enum": [
+              "COMPLETE",
+              "PARTIAL",
+              "UNKNOWN"
+            ],
+            "title": "Data Completeness",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
+          "model_versions": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Model Versions",
+            "type": "object"
+          },
+          "reasons": {
+            "items": {
+              "$ref": "#/components/schemas/Reason"
+            },
+            "title": "Reasons",
+            "type": "array"
+          },
+          "risk_band": {
+            "enum": [
+              "LOW",
+              "REVIEW",
+              "URGENT",
+              "INSUFFICIENT_DATA"
+            ],
+            "title": "Risk Band",
+            "type": "string"
+          }
+        },
+        "required": [
+          "risk_band",
+          "reasons",
+          "evidence",
+          "data_completeness",
+          "model_versions",
+          "colleague_count"
+        ],
+        "title": "AssessmentOut",
+        "type": "object"
+      },
+      "AttachmentOut": {
+        "properties": {
+          "filename": {
+            "title": "Filename",
+            "type": "string"
+          },
+          "mime_type": {
+            "title": "Mime Type",
+            "type": "string"
+          },
+          "sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sha256"
+          },
+          "size": {
+            "title": "Size",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "filename",
+          "mime_type",
+          "size"
+        ],
+        "title": "AttachmentOut",
+        "type": "object"
+      },
+      "Body_import_users_admin_users_import_post": {
+        "properties": {
+          "file": {
+            "contentMediaType": "application/octet-stream",
+            "title": "File",
+            "type": "string"
+          }
+        },
+        "required": [
+          "file"
+        ],
+        "title": "Body_import_users_admin_users_import_post",
+        "type": "object"
+      },
+      "Detail": {
+        "description": "Every error response has this shape.",
+        "examples": [
+          {
+            "detail": "message not found"
+          }
+        ],
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "string"
+          }
+        },
+        "required": [
+          "detail"
+        ],
+        "title": "Detail",
+        "type": "object"
+      },
+      "DirectoryList": {
+        "examples": [
+          {
+            "items": [
+              {
+                "email": "asha@corp.com",
+                "gmail_connected": true,
+                "id": 1,
+                "is_admin": false,
+                "name": "Asha Rao",
+                "phone": "+919876543210",
+                "title": "Accountant"
+              }
+            ]
+          }
+        ],
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/DirectoryUser"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "title": "DirectoryList",
+        "type": "object"
+      },
+      "DirectoryUser": {
+        "examples": [
+          {
+            "email": "asha@corp.com",
+            "gmail_connected": true,
+            "id": 1,
+            "is_admin": false,
+            "name": "Asha Rao",
+            "phone": "+919876543210",
+            "title": "Accountant"
+          }
+        ],
+        "properties": {
+          "email": {
+            "title": "Email",
+            "type": "string"
+          },
+          "gmail_connected": {
+            "title": "Gmail Connected",
+            "type": "boolean"
+          },
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "is_admin": {
+            "title": "Is Admin",
+            "type": "boolean"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "phone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Phone"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "whatsapp_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Whatsapp Number"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "title",
+          "email",
+          "phone",
+          "whatsapp_number",
+          "gmail_connected",
+          "is_admin"
+        ],
+        "title": "DirectoryUser",
+        "type": "object"
+      },
+      "DisconnectOut": {
+        "examples": [
+          {
+            "gmail_connected": false
+          }
+        ],
+        "properties": {
+          "gmail_connected": {
+            "title": "Gmail Connected",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "gmail_connected"
+        ],
+        "title": "DisconnectOut",
+        "type": "object"
+      },
+      "EscalateIn": {
+        "examples": [
+          {
+            "note": "Looks like the CEO but the address is off"
+          }
+        ],
+        "properties": {
+          "note": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          }
+        },
+        "title": "EscalateIn",
+        "type": "object"
+      },
+      "EscalationOut": {
+        "examples": [
+          {
+            "id": 7,
+            "message_id": 42,
+            "sent_at": "2026-10-13T09:05:00Z",
+            "sent_to": "security@corp.com"
+          }
+        ],
+        "properties": {
+          "employee_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Employee Note"
+          },
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "message_id": {
+            "title": "Message Id",
+            "type": "integer"
+          },
+          "sent_at": {
+            "format": "date-time",
+            "title": "Sent At",
+            "type": "string"
+          },
+          "sent_to": {
+            "title": "Sent To",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "message_id",
+          "sent_to",
+          "sent_at",
+          "employee_note"
+        ],
+        "title": "EscalationOut",
+        "type": "object"
+      },
+      "Evidence": {
+        "description": "One finding. status 'not_checked' means the check failed or was skipped, NOT safe.",
+        "properties": {
+          "evidence_id": {
+            "title": "Evidence Id",
+            "type": "string"
+          },
+          "observed_at": {
+            "format": "date-time",
+            "title": "Observed At",
+            "type": "string"
+          },
+          "source": {
+            "title": "Source",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "found",
+              "not_found",
+              "not_checked"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "value": {
+            "title": "Value",
+            "type": "string"
+          }
+        },
+        "required": [
+          "evidence_id",
+          "type",
+          "value",
+          "source",
+          "observed_at",
+          "status"
+        ],
+        "title": "Evidence",
+        "type": "object"
+      },
+      "FeedbackIn": {
+        "examples": [
+          {
+            "verdict": "fine"
+          }
+        ],
+        "properties": {
+          "verdict": {
+            "const": "fine",
+            "title": "Verdict",
+            "type": "string"
+          }
+        },
+        "required": [
+          "verdict"
+        ],
+        "title": "FeedbackIn",
+        "type": "object"
+      },
+      "FeedbackOut": {
+        "examples": [
+          {
+            "message_id": 42,
+            "verdict": "fine"
+          }
+        ],
+        "properties": {
+          "message_id": {
+            "title": "Message Id",
+            "type": "integer"
+          },
+          "verdict": {
+            "const": "fine",
+            "title": "Verdict",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message_id",
+          "verdict"
+        ],
+        "title": "FeedbackOut",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "HealthOut": {
+        "examples": [
+          {
+            "status": "ok"
+          }
+        ],
+        "properties": {
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "title": "HealthOut",
+        "type": "object"
+      },
+      "ImportResult": {
+        "examples": [
+          {
+            "created": 8,
+            "errors": [
+              {
+                "error": "invalid phone number",
+                "row": 5
+              }
+            ],
+            "updated": 2
+          }
+        ],
+        "properties": {
+          "created": {
+            "title": "Created",
+            "type": "integer"
+          },
+          "errors": {
+            "items": {
+              "$ref": "#/components/schemas/ImportRowError"
+            },
+            "title": "Errors",
+            "type": "array"
+          },
+          "updated": {
+            "title": "Updated",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "created",
+          "updated",
+          "errors"
+        ],
+        "title": "ImportResult",
+        "type": "object"
+      },
+      "ImportRowError": {
+        "properties": {
+          "error": {
+            "title": "Error",
+            "type": "string"
+          },
+          "row": {
+            "description": "Spreadsheet row number (header is row 1)",
+            "title": "Row",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "row",
+          "error"
+        ],
+        "title": "ImportRowError",
+        "type": "object"
+      },
+      "MeOut": {
+        "examples": [
+          {
+            "email": "asha@corp.com",
+            "gmail_connected": true,
+            "id": 1,
+            "name": "Asha Rao",
+            "title": "Accountant",
+            "whatsapp_number": "+919876543210"
+          }
+        ],
+        "properties": {
+          "email": {
+            "title": "Email",
+            "type": "string"
+          },
+          "gmail_connected": {
+            "title": "Gmail Connected",
+            "type": "boolean"
+          },
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "whatsapp_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Whatsapp Number"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "email",
+          "title",
+          "gmail_connected",
+          "whatsapp_number"
+        ],
+        "title": "MeOut",
+        "type": "object"
+      },
+      "MePatch": {
+        "examples": [
+          {
+            "whatsapp_number": "98765 43210"
+          }
+        ],
+        "properties": {
+          "whatsapp_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Any format; stored as E.164. null or empty clears it.",
+            "title": "Whatsapp Number"
+          }
+        },
+        "title": "MePatch",
+        "type": "object"
+      },
+      "MessageDetail": {
+        "description": "A message as plain text. Never HTML; URLs are plain strings, not links.",
+        "examples": [
+          {
+            "assessment": {
+              "colleague_count": 0,
+              "data_completeness": "COMPLETE",
+              "evidence": [
+                {
+                  "evidence_id": "ev-1",
+                  "observed_at": "2026-10-13T09:00:05Z",
+                  "source": "stub",
+                  "status": "found",
+                  "type": "keyword",
+                  "value": "CREDENTIAL_REQUEST"
+                }
+              ],
+              "model_versions": {
+                "engine": "stub"
+              },
+              "reasons": [
+                {
+                  "code": "CREDENTIAL_REQUEST",
+                  "evidence_ids": [
+                    "ev-1"
+                  ],
+                  "text": "Asks for login or bank details."
+                }
+              ],
+              "risk_band": "URGENT"
+            },
+            "attachments": [],
+            "body_text": "Reset your password here: http://c0rp-support.com/reset",
+            "channel": "email",
+            "id": 42,
+            "readable": true,
+            "received_at": "2026-10-13T09:00:00Z",
+            "sender": "helpdesk@c0rp-support.com",
+            "sender_display_name": "IT Helpdesk",
+            "source": "gmail",
+            "subject": "Password expires today",
+            "urls": [
+              "http://c0rp-support.com/reset"
+            ],
+            "what_to_do": [
+              "Don't click any links",
+              "Don't reply or send money",
+              "Report this to IT"
+            ]
+          }
+        ],
+        "properties": {
+          "assessment": {
+            "$ref": "#/components/schemas/AssessmentOut"
+          },
+          "attachments": {
+            "items": {
+              "$ref": "#/components/schemas/AttachmentOut"
+            },
+            "title": "Attachments",
+            "type": "array"
+          },
+          "body_text": {
+            "title": "Body Text",
+            "type": "string"
+          },
+          "channel": {
+            "enum": [
+              "email",
+              "sms",
+              "whatsapp"
+            ],
+            "title": "Channel",
+            "type": "string"
+          },
+          "escalated_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Escalated At"
+          },
+          "feedback": {
+            "anyOf": [
+              {
+                "const": "fine",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Feedback"
+          },
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "readable": {
+            "title": "Readable",
+            "type": "boolean"
+          },
+          "received_at": {
+            "format": "date-time",
+            "title": "Received At",
+            "type": "string"
+          },
+          "reply_to": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reply To"
+          },
+          "sender": {
+            "title": "Sender",
+            "type": "string"
+          },
+          "sender_display_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sender Display Name"
+          },
+          "source": {
+            "enum": [
+              "gmail",
+              "check",
+              "whatsapp"
+            ],
+            "title": "Source",
+            "type": "string"
+          },
+          "subject": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subject"
+          },
+          "urls": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Urls",
+            "type": "array"
+          },
+          "what_to_do": {
+            "items": {
+              "type": "string"
+            },
+            "title": "What To Do",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "channel",
+          "source",
+          "sender",
+          "sender_display_name",
+          "reply_to",
+          "subject",
+          "body_text",
+          "urls",
+          "attachments",
+          "received_at",
+          "readable",
+          "assessment",
+          "escalated_at",
+          "feedback",
+          "what_to_do"
+        ],
+        "title": "MessageDetail",
+        "type": "object"
+      },
+      "MessageItem": {
+        "examples": [
+          {
+            "channel": "email",
+            "colleague_count": 2,
+            "escalated": false,
+            "id": 42,
+            "preview": "Password expires today",
+            "readable": true,
+            "received_at": "2026-10-13T09:00:00Z",
+            "risk_band": "URGENT",
+            "sender": "helpdesk@c0rp-support.com",
+            "sender_display_name": "IT Helpdesk",
+            "source": "gmail",
+            "top_reason": "Asks for login or bank details."
+          }
+        ],
+        "properties": {
+          "channel": {
+            "enum": [
+              "email",
+              "sms",
+              "whatsapp"
+            ],
+            "title": "Channel",
+            "type": "string"
+          },
+          "colleague_count": {
+            "title": "Colleague Count",
+            "type": "integer"
+          },
+          "escalated": {
+            "title": "Escalated",
+            "type": "boolean"
+          },
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "preview": {
+            "description": "Subject, else first 120 chars of the body, else \"Couldn't read this email\"",
+            "title": "Preview",
+            "type": "string"
+          },
+          "readable": {
+            "description": "false for placeholder messages we could not parse",
+            "title": "Readable",
+            "type": "boolean"
+          },
+          "received_at": {
+            "format": "date-time",
+            "title": "Received At",
+            "type": "string"
+          },
+          "risk_band": {
+            "enum": [
+              "LOW",
+              "REVIEW",
+              "URGENT",
+              "INSUFFICIENT_DATA"
+            ],
+            "title": "Risk Band",
+            "type": "string"
+          },
+          "sender": {
+            "title": "Sender",
+            "type": "string"
+          },
+          "sender_display_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sender Display Name"
+          },
+          "source": {
+            "enum": [
+              "gmail",
+              "check",
+              "whatsapp"
+            ],
+            "title": "Source",
+            "type": "string"
+          },
+          "top_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Text of the first reason, if any",
+            "title": "Top Reason"
+          }
+        },
+        "required": [
+          "id",
+          "channel",
+          "source",
+          "sender",
+          "sender_display_name",
+          "preview",
+          "received_at",
+          "risk_band",
+          "top_reason",
+          "colleague_count",
+          "escalated",
+          "readable"
+        ],
+        "title": "MessageItem",
+        "type": "object"
+      },
+      "MessageList": {
+        "examples": [
+          {
+            "items": []
+          }
+        ],
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/MessageItem"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Pass as ?cursor= for the next page; null on the last page",
+            "title": "Next Cursor"
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "title": "MessageList",
+        "type": "object"
+      },
+      "OkOut": {
+        "examples": [
+          {
+            "ok": true
+          }
+        ],
+        "properties": {
+          "ok": {
+            "title": "Ok",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "ok"
+        ],
+        "title": "OkOut",
+        "type": "object"
+      },
+      "Reason": {
+        "description": "A plain-language reason (e.g. SPF_FAIL) pointing at evidence.",
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Evidence Ids",
+            "type": "array"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "text",
+          "evidence_ids"
+        ],
+        "title": "Reason",
+        "type": "object"
+      },
+      "ScanOut": {
+        "examples": [
+          {
+            "new_messages": 3
+          }
+        ],
+        "properties": {
+          "new_messages": {
+            "title": "New Messages",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "new_messages"
+        ],
+        "title": "ScanOut",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Evedentia",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/admin/users": {
+      "get": {
+        "operationId": "list_users_admin_users_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "in": "cookie",
+            "name": "ev_session",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Ev Session"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DirectoryList"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Admins only"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List the employee directory",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/admin/users/import": {
+      "post": {
+        "operationId": "import_users_admin_users_import_post",
+        "parameters": [
+          {
+            "in": "cookie",
+            "name": "ev_session",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Ev Session"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_import_users_admin_users_import_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Admins only"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Seed the employee directory from a CSV (name,title,email,phone); upserts by email",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/auth/gmail/disconnect": {
+      "post": {
+        "operationId": "gmail_disconnect_auth_gmail_disconnect_post",
+        "parameters": [
+          {
+            "in": "cookie",
+            "name": "ev_session",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Ev Session"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisconnectOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Revoke and forget the Gmail connection",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/auth/google": {
+      "get": {
+        "operationId": "google_login_auth_google_get",
+        "responses": {
+          "302": {
+            "description": "Redirect",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Start Google sign-in: browser navigation, not fetch (redirects to Google)",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/auth/google/callback": {
+      "get": {
+        "operationId": "google_callback_auth_google_callback_get",
+        "responses": {
+          "302": {
+            "description": "Sets the ev_session cookie and redirects to FRONTEND_URL/inbox (?error=gmail_scope if Gmail access was not granted), or to FRONTEND_URL/login?error=domain|oauth|email",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Google redirects here after consent",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "operationId": "logout_auth_logout_post",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OkOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Sign out (clears the cookie)",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/check": {
+      "post": {
+        "operationId": "check_check_post",
+        "parameters": [
+          {
+            "in": "cookie",
+            "name": "ev_session",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Ev Session"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "JSON body of POST /check for a pasted SMS or WhatsApp message.",
+                "examples": [
+                  {
+                    "channel": "sms",
+                    "sender": "+91 98765 43210",
+                    "text": "Your KYC expires today. Update now: http://sbi-kyc.example.com"
+                  }
+                ],
+                "properties": {
+                  "channel": {
+                    "enum": [
+                      "sms",
+                      "whatsapp"
+                    ],
+                    "title": "Channel",
+                    "type": "string"
+                  },
+                  "sender": {
+                    "maxLength": 200,
+                    "minLength": 1,
+                    "title": "Sender",
+                    "type": "string"
+                  },
+                  "text": {
+                    "maxLength": 5000,
+                    "minLength": 1,
+                    "title": "Text",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "channel",
+                  "sender",
+                  "text"
+                ],
+                "title": "CheckText",
+                "type": "object"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "properties": {
+                  "file": {
+                    "description": ".eml, max 2 MB",
+                    "format": "binary",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "file"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Unsupported Media Type"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "summary": "Check a pasted SMS/WhatsApp message (JSON) or an uploaded .eml (multipart, field 'file')",
+        "tags": [
+          "check"
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Health",
+        "tags": [
+          "system"
+        ]
+      }
+    },
+    "/me": {
+      "get": {
+        "operationId": "get_me_me_get",
+        "parameters": [
+          {
+            "in": "cookie",
+            "name": "ev_session",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Ev Session"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MeOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Not signed in"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Current employee",
+        "tags": [
+          "me"
+        ]
+      },
+      "patch": {
+        "operationId": "patch_me_me_patch",
+        "parameters": [
+          {
+            "in": "cookie",
+            "name": "ev_session",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Ev Session"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MePatch"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MeOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Not signed in"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "summary": "Set or clear the WhatsApp number",
+        "tags": [
+          "me"
+        ]
+      }
+    },
+    "/me/messages": {
+      "get": {
+        "operationId": "my_messages_me_messages_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "band",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "LOW",
+                    "REVIEW",
+                    "URGENT",
+                    "INSUFFICIENT_DATA"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Band"
+            }
+          },
+          {
+            "in": "query",
+            "name": "channel",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "email",
+                    "sms",
+                    "whatsapp"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Channel"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 25,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "in": "cookie",
+            "name": "ev_session",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Ev Session"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageList"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Not signed in"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "My messages, riskiest first (URGENT, REVIEW, INSUFFICIENT_DATA, LOW, then newest)",
+        "tags": [
+          "me"
+        ]
+      }
+    },
+    "/me/messages/{message_id}": {
+      "get": {
+        "operationId": "my_message_me_messages__message_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "message_id",
+            "required": true,
+            "schema": {
+              "title": "Message Id",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "cookie",
+            "name": "ev_session",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Ev Session"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Not signed in"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "No such message (or not yours)"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "One message as plain text, with reasons, evidence and what to do",
+        "tags": [
+          "me"
+        ]
+      }
+    },
+    "/me/messages/{message_id}/escalate": {
+      "post": {
+        "operationId": "escalate_me_messages__message_id__escalate_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "message_id",
+            "required": true,
+            "schema": {
+              "title": "Message Id",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "cookie",
+            "name": "ev_session",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Ev Session"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/EscalateIn"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EscalationOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Not signed in"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "No such message (or not yours)"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Email failed; nothing saved, retry"
+          }
+        },
+        "summary": "Report to IT (idempotent: a second call returns the first escalation and sends nothing)",
+        "tags": [
+          "me"
+        ]
+      }
+    },
+    "/me/messages/{message_id}/feedback": {
+      "post": {
+        "operationId": "feedback_me_messages__message_id__feedback_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "message_id",
+            "required": true,
+            "schema": {
+              "title": "Message Id",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "cookie",
+            "name": "ev_session",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Ev Session"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeedbackIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeedbackOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Not signed in"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "No such message (or not yours)"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Mark \"This is fine\" (one per message, repeat calls just overwrite)",
+        "tags": [
+          "me"
+        ]
+      }
+    },
+    "/me/reports": {
+      "get": {
+        "operationId": "my_reports_me_reports_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "band",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "LOW",
+                    "REVIEW",
+                    "URGENT",
+                    "INSUFFICIENT_DATA"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Band"
+            }
+          },
+          {
+            "in": "query",
+            "name": "channel",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "email",
+                    "sms",
+                    "whatsapp"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Channel"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 25,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "in": "cookie",
+            "name": "ev_session",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Ev Session"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageList"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Not signed in"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Messages I submitted via Check a message or WhatsApp, newest first",
+        "tags": [
+          "me"
+        ]
+      }
+    },
+    "/scan": {
+      "post": {
+        "operationId": "scan_scan_post",
+        "parameters": [
+          {
+            "in": "cookie",
+            "name": "ev_session",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Ev Session"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScanOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Not signed in"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Gmail not connected or revoked"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Bad Gateway"
+          }
+        },
+        "summary": "Check my Gmail now",
+        "tags": [
+          "me"
+        ]
+      }
+    },
+    "/webhooks/twilio/whatsapp": {
+      "post": {
+        "operationId": "twilio_whatsapp_webhooks_twilio_whatsapp_post",
+        "responses": {
+          "200": {
+            "content": {
+              "application/xml": {
+                "example": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Message>Checking...</Message></Response>",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "TwiML reply"
+          },
+          "403": {
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "503": {
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Detail"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Twilio WhatsApp webhook (form-encoded, X-Twilio-Signature required)",
+        "tags": [
+          "webhooks"
+        ]
+      }
+    }
+  }
+}
