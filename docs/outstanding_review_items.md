@@ -7,23 +7,22 @@ checked against the repository when this file was written.
 Note: no written list existed before this file. The `auth_dkim` item was raised in conversation
 and is recorded here for the first time so that it cannot be lost.
 
-## Open discrepancies
+## Resolved
 
-### 1. `auth_dkim` is evaluated but not a required check
+### 1. `auth_dkim` was evaluated but not a required check (resolved, policy 0.3.0)
 
-* **What the code does.** `engine/rules.py` runs `check_auth(..., "dkim")` for every email and
-  records evidence (`auth_dkim-N`), and `engine/policy.py` gives it a display name. But
-  `_RULES_REQUIRED` in `engine/policy.py` contains `auth_spf` and `auth_dmarc` only, so
-  `auth_dkim` is **not** in the `rules_only` or `full` required set.
-* **Effect.** A message whose DKIM result is missing, untrusted or inconclusive can still be
-  `Low` (under `rules_only`) as long as SPF and DMARC are clean and trusted. A verified DKIM
-  *failure* is still an indicator (Review, or Urgent with an identity mismatch).
-* **Why it is a discrepancy.** The project plan lists SPF, DKIM and DMARC as header checks, and
-  the code computes all three, but only two gate completeness.
-* **Pinned by a test.** `tests/test_policy.py::test_failed_non_required_check_does_not_block_low`
-  asserts the current behaviour (`"auth_dkim" not in PROFILES["rules_only"].required`).
-* **Decision needed.** Either add `auth_dkim` to the required set (and change that test, bump
-  the policy version) or document why DMARC alignment makes it redundant. Not changed here.
+* **Was.** `engine/rules.py` computed DKIM, but `_RULES_REQUIRED` in `engine/policy.py` held
+  only `auth_spf` and `auth_dmarc`, so a missing, untrusted or inconclusive DKIM result could
+  still produce `Low`. A test pinned that behaviour.
+* **Now.** `auth_dkim` is required in both profiles. A missing, untrusted (e.g. uploaded
+  `.eml`) or inconclusive (`none`, `neutral`, `temperror`) DKIM result gives
+  `Insufficient data`, never `Low`. A verified DKIM `fail` remains an indicator (Review).
+* **Consequence to be aware of.** Real mail without a DKIM signature, or mail whose DKIM result
+  the receiving server did not report, can no longer be `Low`. That is the intended strictness
+  ("unknown is not safe") but will show as "could not fully check" more often.
+* **Tests.** `tests/test_policy.py`: the three auth checks are required; incomplete DKIM alone
+  prevents Low; missing, untrusted and inconclusive DKIM end to end; a verified failure is
+  still an indicator. The old test that pinned DKIM as non-required was replaced.
 
 ## Open decisions about unimplemented required checks
 

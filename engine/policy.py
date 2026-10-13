@@ -28,7 +28,7 @@ from .config import EngineConfig
 from .rules import CheckResult
 from .schemas import Evidence, EvidenceStatus, Reason, ReasonCode, RiskBand
 
-POLICY_VERSION = "0.2.1"
+POLICY_VERSION = "0.3.0"   # 0.3.0: auth_dkim is now a required check
 
 
 @dataclass(frozen=True)
@@ -38,8 +38,11 @@ class Profile:
     is_full: bool        # True only for a profile that covers every planned check
 
 
+# All three header authentication results are required. A missing, untrusted or inconclusive
+# SPF, DKIM or DMARC result means the sender was not verified, so it can never be Low.
 _RULES_REQUIRED = frozenset({
-    "auth_spf", "auth_dmarc", "reply_to", "identity", "lookalike", "link_mismatch", "attachments",
+    "auth_spf", "auth_dkim", "auth_dmarc", "reply_to", "identity", "lookalike", "link_mismatch",
+    "attachments",
 })
 
 PROFILES: dict[str, Profile] = {

@@ -49,7 +49,7 @@ def test_rules_only_never_touches_the_network_even_with_a_service_supplied():
 
 def test_analyze_without_service_is_unchanged_and_backward_compatible():
     a = analyze(clean_msg(), now=NOW)
-    assert a.risk_band is B.LOW and a.policy_version == POLICY_VERSION == "0.2.1"
+    assert a.risk_band is B.LOW and a.policy_version == POLICY_VERSION == "0.3.0"
 
 
 # ------------------------------------------------------------------ full profile

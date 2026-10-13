@@ -188,7 +188,7 @@ def test_analyze_survives_a_coverage_gap_end_to_end():
 # ================================================================== 3. thresholds and policy
 
 def test_policy_version_and_basis_table():
-    assert POLICY_VERSION == "0.2.1"
+    assert POLICY_VERSION == "0.3.0"
     for rule in ("U1_THREAT_INTEL_MATCH", "U2_EXECUTABLE_ATTACHMENT",
                  "U3_VERIFIED_AUTH_FAIL_WITH_IDENTITY", "U4_COMBINATION", "R1_INDICATOR",
                  "I1_REQUIRED_CHECK_INCOMPLETE", "L1_ALL_REQUIRED_CHECKS_CLEAN"):

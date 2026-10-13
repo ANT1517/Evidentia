@@ -82,7 +82,7 @@ assessment = analyze(msg, config=replace(DEFAULT_CONFIG, active_profile="full"),
 
 `engine/threat_intel/config.py::THRESHOLD_REGISTRY` and `engine/policy.py::RULE_BASIS` carry
 the same information in code, and a test keeps the registry equal to the defaults. Policy
-version is `0.2.1` (threat-intel component `0.1.1`); any change to these values or rules should bump it.
+version is `0.3.0` (threat-intel component `0.1.1`); any change to these values or rules should bump it.
 
 ### Sharing policy (what may leave the process)
 

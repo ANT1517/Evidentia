@@ -75,9 +75,42 @@ def test_low_is_impossible_when_a_required_check_never_ran(check):
 
 
 def test_failed_non_required_check_does_not_block_low():
-    assert "auth_dkim" not in PROFILES["rules_only"].required
-    d = run(all_clean() + [failed("auth_dkim")])
+    # a check outside the profile's required set (here a made-up one) must not block Low
+    assert "some_optional_check" not in PROFILES["rules_only"].required
+    d = run(all_clean() + [failed("some_optional_check")])
     assert d.band == B.LOW
+
+
+def test_all_three_authentication_checks_are_required():
+    for c in ("auth_spf", "auth_dkim", "auth_dmarc"):
+        assert c in PROFILES["rules_only"].required and c in PROFILES["full"].required
+
+
+def test_incomplete_dkim_alone_prevents_low_in_policy():
+    d = run(all_clean(auth_dkim=failed("auth_dkim")))
+    assert d.band == B.INSUFFICIENT_DATA and "auth_dkim" in d.missing_checks
+    d2 = run([r for r in all_clean() if r.check != "auth_dkim"])    # never ran at all
+    assert d2.band == B.INSUFFICIENT_DATA
+    assert "auth_dkim" in d2.missing_checks
+
+
+def test_end_to_end_dkim_missing_untrusted_or_inconclusive_cannot_be_low():
+    ok = analyze(make(), now=NOW)
+    assert ok.risk_band == B.LOW                                       # control: all three pass
+
+    for dkim in (None, "none", "neutral", "temperror", "policy"):
+        a = analyze(make(auth=trusted_auth(dkim=dkim)), now=NOW)
+        assert a.risk_band == B.INSUFFICIENT_DATA, dkim
+        assert any(e.type == "auth_dkim" and e.status == S.NOT_CHECKED for e in a.evidence)
+
+    untrusted = analyze(make(ingest_source=IngestSource.EML_UPLOAD), now=NOW)
+    assert untrusted.risk_band == B.INSUFFICIENT_DATA
+
+
+def test_verified_dkim_failure_is_still_an_indicator_not_just_incomplete():
+    a = analyze(make(auth=trusted_auth(dkim="fail")), now=NOW)
+    assert a.risk_band == B.REVIEW
+    assert RC.DKIM_FAIL in {r.code for r in a.reasons}
 
 
 def test_review_for_single_indicators_never_urgent():
@@ -169,7 +202,7 @@ def test_completeness_none_when_nothing_ran():
 
 def test_analyze_reports_policy_version_profile_and_rules():
     a = analyze(make(), now=NOW)
-    assert a.policy_version == POLICY_VERSION == "0.2.1"
+    assert a.policy_version == POLICY_VERSION == "0.3.0"
     assert a.analysis_profile == "rules_only"
     assert a.data_completeness == "partial"
     assert a.risk_band == B.LOW
