@@ -1,0 +1,20 @@
+From: "Accounts" <accounts@invoices-now.example>
+To: priya@ourcompany.example
+Subject: Invoice attached
+Date: Mon, 12 Oct 2026 12:00:00 +0530
+Message-ID: <att1@invoices-now.example>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="BOUND"
+
+--BOUND
+Content-Type: text/plain; charset="utf-8"
+
+Please find the invoice attached.
+
+--BOUND
+Content-Type: application/octet-stream; name="invoice.pdf.exe"
+Content-Disposition: attachment; filename="invoice.pdf.exe"
+Content-Transfer-Encoding: base64
+
+TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+--BOUND--

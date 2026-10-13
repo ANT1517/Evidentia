@@ -1,0 +1,16 @@
+From: "Acme Supplies Billing" <billing@acmesupplies.example>
+To: priya@ourcompany.example
+Subject: Invoice 4471 due Friday
+Date: Mon, 12 Oct 2026 09:15:00 +0530
+Message-ID: <inv4471@acmesupplies.example>
+Authentication-Results: mx.ourcompany.example; spf=pass smtp.mailfrom=acmesupplies.example; dkim=pass header.d=acmesupplies.example; dmarc=pass header.from=acmesupplies.example
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+
+Hi Priya,
+
+Invoice 4471 for October is due this Friday. You can view it in the supplier
+portal at https://portal.acmesupplies.example/invoices/4471.
+
+Thanks,
+Acme Billing

@@ -1,0 +1,11 @@
+From: =?UTF-8?B?UmFqZXNoIEt1bWFyIOKAkyBDRU8=?= <rk@example.org>
+To: priya@ourcompany.example
+Subject: =?UTF-8?Q?Caf=C3=A9_invoice_=E2=80=93_urgent?=
+Date: Mon, 12 Oct 2026 12:30:00 +0530
+Message-ID: <enc1@example.org>
+Received-SPF: softfail (domain of transitioning example.org does not designate sender)
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Visit http://example.org/pay. Thanks=21
