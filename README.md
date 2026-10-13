@@ -20,7 +20,7 @@ assessment = analyze(normalized_message)
 | Policy layer (`engine/policy.py`, version 0.2.0) | done |
 | Threat-intel adapters (`engine/threat_intel/`) | done (mocked tests only; **never run live**) |
 | Email DistilBERT (`cybersectony/...v2.4.1`) | **evaluated, not integrated**: label mapping unresolved and fails basic cases, see `docs/email_model_suitability.md` |
-| Laya intent questions (`Ankit1106/laya-typed-decisions`) | **assessed by smoke test, no adapter**: ranking signal but uncalibrated; recommendation is a larger labelled evaluation first, see `docs/intent_model_suitability.md` |
+| Laya intent questions (`Ankit1106/laya-typed-decisions`) | **optional isolated adapter** (`engine/models/intent.py`, disabled by default, not called by `analyze()`, cannot change a band); raw uncalibrated probabilities only. Assessed by smoke test: ranking signal but uncalibrated; recommendation is a larger labelled evaluation first, see `docs/intent_model_suitability.md` |
 | SMS-Shield wrapper | todo |
 | Labelled evaluation dataset **tooling** (`evaluation/`) | schema, annotation guide, validator and split tools done; **no evaluation corpus exists yet** (11 synthetic format examples, all provisional). See `docs/evaluation_dataset_spec.md` |
 | Campaign linker | todo |

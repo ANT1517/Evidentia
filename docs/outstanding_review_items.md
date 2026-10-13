@@ -36,7 +36,7 @@ check is removed from the required set, the `full` profile stays `Insufficient d
 
 The `full` profile requires `intent_questions`. The one candidate assessed is not approved for
 an adapter (`docs/intent_model_suitability.md`); the recommendation is a larger labelled
-evaluation first (`docs/evaluation_dataset_spec.md`).
+evaluation first (`docs/evaluation_dataset_spec.md`). An optional, isolated adapter now exists (`engine/models/intent.py`): disabled by default, not wired into `analyze()`, returns raw uncalibrated probabilities with explicit status. The `intent_questions` required check is still unimplemented.
 
 ## Unvalidated assumptions
 
